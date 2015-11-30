@@ -34,7 +34,7 @@ end}
 
 %prep
 %if %{__autobuild__}
-%setup -q -n libperl_crc32
+%setup -q -n libperlcrc32
 %else
 %setup -q
 %endif
