@@ -21,7 +21,7 @@ URL: https://github.com/derElektrobesen/perl_crc32
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{__autobuild__}
-Source0: %{name}-GIT_TAG.tar.bz2
+#Source0: %{name}-GIT_TAG.tar.bz2
 %endif
 
 %description
