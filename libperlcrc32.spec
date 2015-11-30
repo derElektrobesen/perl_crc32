@@ -21,7 +21,11 @@ URL: https://github.com/derElektrobesen/perl_crc32
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{__autobuild__}
-#Source0: %{name}-GIT_TAG.tar.bz2
+Packager: BUILD_USER
+#Source0: perl_crc32-GIT_TAG.tar.bz2
+%else
+Packager: Pavel Berezhnoy <p.berezhnoy@corp.mail.ru>
+#Source0: perl_crc32-%{name}-%{version}.tar.gz
 %endif
 
 %description
@@ -34,8 +38,13 @@ Build by: BUILD_USER
 %endif
 
 %prep
-#rm -rf %{name}*
-%setup -q -n %{name}
+%if %{__autobuild__}
+%setup -q -n perl_crc32
+%else
+rm -rf %{name}-%{version}
+git clone https://github.com/derElektrobesen/perl_crc32.git %{name}-%{version}
+%setup -T -D -n %{name}-%{version}
+%endif
 
 %build
 make so
