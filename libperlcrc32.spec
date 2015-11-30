@@ -1,46 +1,44 @@
+# don`t strip
 %define __autobuild__ 0
 
 %if %{__autobuild__}
-%define release 1
+%define version PKG_VERSION
+%define branch GIT_TAG
 %else
-%define release PKG_RELEASE
+%define version %(/bin/date +"%Y%m%d.%H%M")
+%define branch master
 %endif
 
-Summary: Perl implementation of CRC32 algorithm
 Name: libperlcrc32
-Version: 1.0
+Version: %{version}
 Release: 1
+
+Summary: Perl implementation of CRC32 algorithm
+License: BSD
 Group: Development/Libraries
 URL: https://github.com/derElektrobesen/perl_crc32
-License: BSD
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
 %if %{__autobuild__}
-Packager: BUILD_USER
-Source0: libperlcrc32-GIT_TAG.tar.bz2
-%else
-Packager: Pavel Berezhnoy <p.berezhnoy@corp.mail.ru>
-Source: libperlcrc32-1.0.tar.gz
+Source0: %{name}-GIT_TAG.tar.bz2
 %endif
 
 %description
 Perl implementation of CRC32 algorithm
 
-%{lua:
-if rpm.expand("%{__autobuild__}") == '1'
-then
-print("From tag: GIT_TAG\n")
-print("Git hash: GITHASH\n")
-print("Build by: BUILD_USER\n")
-end}
-
-%prep
 %if %{__autobuild__}
-%setup -q -n libperlcrc32
-%else
-%setup -q
+From tag: GIT_TAG
+Git hash: GITHASH
+Build by: BUILD_USER
 %endif
 
+%prep
+#rm -rf %{name}*
+%setup -q -n %{name}
+
 %build
-make %{?_smp_mflags} so
+make so
 
 %install
 install -d %{buildroot}/%{_libdir}
