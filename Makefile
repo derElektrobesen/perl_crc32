@@ -11,8 +11,10 @@ TARGET_LIB = lib$(TARGET).so
 SRCS = crc32.c
 OBJS = $(SRCS:.c=.o)
 
-.PHONY: all
+.PHONY: all so
 all: ${TARGET_LIB}
+
+so: all
 
 ${TARGET_LIB}: ${OBJS}
 	$(CC) ${LDFLAGS} -o $@ $^
@@ -20,8 +22,3 @@ ${TARGET_LIB}: ${OBJS}
 .PHONY: clean
 clean:
 	-${RM} ${TARGET_LIB} ${OBJS}
-
-.PHONY: install
-install: all
-	-mkdir -p ${DESTPATH}
-	-install -p -m 644 $(TARGET_LIB) ${DESTPATH}/${TARGET_LIB}
