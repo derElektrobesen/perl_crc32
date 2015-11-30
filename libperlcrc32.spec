@@ -22,7 +22,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{__autobuild__}
 Packager: BUILD_USER
-Source0: perl-crc32-GIT_TAG.tar.bz2
+Source0: perl_crc32.tar.bz2
 %else
 Packager: Pavel Berezhnoy <p.berezhnoy@corp.mail.ru>
 #Source0: perl_crc32-%{name}-%{version}.tar.gz
