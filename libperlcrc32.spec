@@ -25,7 +25,6 @@ Packager: BUILD_USER
 Source0: perl_crc32-GIT_TAG.tar.bz2
 %else
 Packager: Pavel Berezhnoy <p.berezhnoy@corp.mail.ru>
-#Source0: perl_crc32-%{name}-%{version}.tar.gz
 %endif
 
 %description
@@ -36,6 +35,22 @@ From tag: GIT_TAG
 Git hash: GITHASH
 Build by: BUILD_USER
 %endif
+
+%package devel
+Summary: Header files for %{name}
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description devel
+Header files for %{name}
+
+%{lua:
+if rpm.expand("%{__autobuild__}") == '1'
+then
+print("From tag: GIT_TAG\n")
+print("Git hash: GITHASH\n")
+print("Build by: BUILD_USER\n")
+end}
 
 %prep
 %if %{__autobuild__}
@@ -55,3 +70,15 @@ install -m 755 libperlcrc32.so %{buildroot}/%{_libdir}
 
 %files
 /%{_libdir}/libperlcrc32.so
+
+%files devel
+%{_includedir}/*
+
+%post
+ldconfig
+
+%changelog
+%if %{__autobuild__}
+GIT_LOG
+%endif
+
