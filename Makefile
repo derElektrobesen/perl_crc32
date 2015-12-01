@@ -11,10 +11,17 @@ TARGET_LIB = lib$(TARGET).so
 SRCS = crc32.c
 OBJS = $(SRCS:.c=.o)
 
+HEADERS = crc32.h
+COMMA = ,
+
 .PHONY: all so
 all: ${TARGET_LIB}
 
 so: all
+
+install_headers:
+	#-cp {$(subst $(COMMA),:,$(HEADERS))} $(DESTDIR)
+	-cp $(HEADERS) $(DESTDIR)
 
 ${TARGET_LIB}: ${OBJS}
 	$(CC) ${LDFLAGS} -o $@ $^
