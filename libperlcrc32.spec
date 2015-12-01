@@ -64,10 +64,8 @@ git clone https://github.com/derElektrobesen/perl_crc32.git %{name}-%{version}
 %build
 make so
 
-%build devel
-make install_headers DESTDIR=%{buildroot}/%{_includedir}
-
 %install
+make install_headers DESTDIR=%{buildroot}/%{_includedir}
 install -d %{buildroot}/%{_libdir}
 install -m 755 libperlcrc32.so %{buildroot}/%{_libdir}
 
