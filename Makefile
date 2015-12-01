@@ -21,6 +21,7 @@ so: all
 
 install_headers:
 	#-cp {$(subst $(COMMA),:,$(HEADERS))} $(DESTDIR)
+	-mkdir -p $(DESTDIR)
 	-cp $(HEADERS) $(DESTDIR)
 
 ${TARGET_LIB}: ${OBJS}

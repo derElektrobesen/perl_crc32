@@ -63,7 +63,7 @@ git clone https://github.com/derElektrobesen/perl_crc32.git %{name}-%{version}
 
 %build
 make so
-make install_headers DESTDIR=%{_includedir}
+make install_headers DESTDIR=%{buildroot}/%{_includedir}
 
 %install
 install -d %{buildroot}/%{_libdir}
