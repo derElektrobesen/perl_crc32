@@ -1,5 +1,4 @@
 DESTDIR ?=
-DESTPATH = ${DESTDIR}/usr/local/lib
 
 TARGET = perlcrc32
 CC = gcc
@@ -12,7 +11,6 @@ SRCS = crc32.c
 OBJS = $(SRCS:.c=.o)
 
 HEADERS = crc32.h
-COMMA = ,
 
 .PHONY: all so
 all: ${TARGET_LIB}
@@ -20,9 +18,8 @@ all: ${TARGET_LIB}
 so: all
 
 install_headers:
-	#-cp {$(subst $(COMMA),:,$(HEADERS))} $(DESTDIR)
 	-mkdir -p $(DESTDIR)
-	-cp $(HEADERS) $(DESTDIR)
+	$(foreach f,$(HEADERS),cp $(f) $(DESTDIR)/$(f);)
 
 ${TARGET_LIB}: ${OBJS}
 	$(CC) ${LDFLAGS} -o $@ $^
