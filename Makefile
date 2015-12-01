@@ -7,10 +7,10 @@ LDFLAGS = -shared
 RM = rm -f
 TARGET_LIB = lib$(TARGET).so
 
-SRCS = crc32.c
+SRCS = perl_crc32.c
 OBJS = $(SRCS:.c=.o)
 
-HEADERS = crc32.h
+HEADERS = perl_crc32.h
 
 .PHONY: all so
 all: ${TARGET_LIB}

@@ -2,6 +2,8 @@
 // $Id: crc32.c,v 1.4 2007/10/26 19:21:41 ivanov Exp $
 //***************************************************************************
 
+#include "perl_crc32.h"
+
 static const unsigned long perl_crc32_table[256] = {
 	0x00000000L, 0x77073096L, 0xee0e612cL, 0x990951baL, 0x076dc419L,
 	0x706af48fL, 0xe963a535L, 0x9e6495a3L, 0x0edb8832L, 0x79dcb8a4L,
